@@ -9,7 +9,7 @@ import 'main.dart';
 Future<void> addUser(
   Persona candidato,
   String sede,
-  String url,
+  String url, String candidatura,
 ) {
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -24,6 +24,7 @@ Future<void> addUser(
         'Titolo': candidato.Titolo,
         'Sede': sede,
         'UrlPdf': url,
+        'Candidatura' : candidatura,
       })
       .then((value) => print("User Added"))
       .catchError((error) => print("Failed to add user: $error"));

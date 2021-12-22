@@ -5,7 +5,6 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import 'main.dart';
 
-//https://flutter-examples.com/get-multiple-checkbox-checked-value-in-flutter/
 
 class CondizioneCameriere extends StatefulWidget {
   const CondizioneCameriere({Key? key, required this.candidato})

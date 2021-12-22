@@ -12,8 +12,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 enum TitoloDiStudio { Diploma, Laurea }
-enum PosizioneAperte { Cuoco, Camerriere }
+enum PosizioneAperte { Cuoco, Cameriere }
 
 class  Persona {
   String Nome;
@@ -199,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ListTile(
                     title: const Text('Cameriere'),
                     leading: Radio<PosizioneAperte>(
-                      value: PosizioneAperte.Camerriere,
+                      value: PosizioneAperte.Cameriere,
                       groupValue: _posizioneAperte,
                       onChanged: (PosizioneAperte? value) {
                         setState(() {
@@ -216,21 +214,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')),
                           );
-                          print(Nome);
-                          print(Cognome);
-                          print(Email);
-                          print(Telefono);
-                          print(Data);
+
                           Posizione = _posizioneAperte
                               .toString()
                               .replaceAll('PosizioneAperte.', '');
-                          print(Posizione);
                           Titolo = _titoloDiStudio
                               .toString()
                               .replaceAll('TitoloDiStudio.', '');
-                          print(Titolo);
                           Persona candidato = Persona(Nome,Cognome, Email, Telefono, Data, Titolo, Posizione);
-
                           if (Posizione == 'Cuoco') {
                             Navigator.push(
                               context,

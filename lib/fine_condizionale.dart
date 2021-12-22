@@ -68,7 +68,9 @@ class _FineCondizioneState extends State<FineCondizione> {
                 ElevatedButton(
                     onPressed: () {
                       addUser(widget.candidato,
-                          widget.posizione.values.elementAt(0), url);
+                          widget.posizione.values.elementAt(0), url , widget.posizione.values.elementAt(1) +
+                              '. ' +
+                              widget.posizione.values.elementAt(2));
                     },
                     child: Text('INVIA')),
                 SizedBox(
