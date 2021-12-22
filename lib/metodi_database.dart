@@ -8,8 +8,9 @@ import 'main.dart';
 
 Future<void> addUser(
   Persona candidato,
+  String sede,
+  String url,
 ) {
-  // FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   return users
@@ -21,16 +22,21 @@ Future<void> addUser(
         'Telefono': candidato.Telefono,
         'Posizione': candidato.Posizione,
         'Titolo': candidato.Titolo,
+        'Sede': sede,
+        'UrlPdf': url,
       })
       .then((value) => print("User Added"))
       .catchError((error) => print("Failed to add user: $error"));
 }
 
-Future<void> Upload(Persona candidato) async {
-  String path = 'CV/' + candidato.Nome + '_' + candidato.Cognome;
+Future<bool> Upload(Persona candidato) async {
+  String path = 'CV/' + candidato.Nome + '_' + candidato.Cognome + '_' + candidato.Telefono;
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
-    allowedExtensions: ['pdf', 'doc', 'jpg'],
+    allowedExtensions: [
+      'pdf',
+      'doc',
+    ],
   );
   if (result != null) {
     File file = File(result.files.single.path!);
@@ -38,6 +44,17 @@ Future<void> Upload(Persona candidato) async {
     await firebase_storage.FirebaseStorage.instance.ref(path).putFile(file);
     //var url = await downloadURL().toString();
     //print(url);
-
+    return true;
   }
+  return false;
+}
+
+Future<String> downloadURL(Persona candidato) async {
+  String path = 'CV/' + candidato.Nome + '_' + candidato.Cognome + '_' + candidato.Telefono;
+  String downloadURL = await firebase_storage.FirebaseStorage.instance
+      .ref(path)
+      .getDownloadURL();
+  print(downloadURL);
+
+  return downloadURL.toString();
 }

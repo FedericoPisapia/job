@@ -17,6 +17,9 @@ class FineCondizione extends StatefulWidget {
 }
 
 class _FineCondizioneState extends State<FineCondizione> {
+  String url = '';
+  bool cv = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +52,12 @@ class _FineCondizioneState extends State<FineCondizione> {
           ),
           TextButton(
               onPressed: () async {
-                Upload(widget.candidato);
+                cv = await Upload(widget.candidato);
+                url = await downloadURL(widget.candidato);
+                setState(() {});
               },
               child: Text('Carica il tuo cv')),
+          (cv) ? Text('CV caricato correttamente') : Container(),
           SizedBox(
             height: 20,
           ),
@@ -61,7 +67,8 @@ class _FineCondizioneState extends State<FineCondizione> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      addUser(widget.candidato);
+                      addUser(widget.candidato,
+                          widget.posizione.values.elementAt(0), url);
                     },
                     child: Text('INVIA')),
                 SizedBox(

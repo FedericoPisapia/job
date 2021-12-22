@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-enum TitoloDiStudio { Diplomato, Laureato }
+enum TitoloDiStudio { Diploma, Laurea }
 enum PosizioneAperte { Cuoco, Camerriere }
 
 class  Persona {
@@ -52,7 +52,7 @@ class  Persona {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TitoloDiStudio? _titoloDiStudio = TitoloDiStudio.Diplomato;
+  TitoloDiStudio? _titoloDiStudio = TitoloDiStudio.Diploma;
   PosizioneAperte? _posizioneAperte = PosizioneAperte.Cuoco;
   final _formKey = GlobalKey<FormState>();
   String dropdownValue = 'Diploma';
@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (telefono == null || telefono.isEmpty) {
                         return 'Please enter some text';
                       }
-                      // TODO da rivedere
+
                       if (!RegExp(r"[0-9]").hasMatch(telefono)) {
                         return 'Please enter correct text';
                       }
@@ -160,9 +160,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(height: 10),
                   Text('Titolo di studio'),
                   ListTile(
-                    title: const Text('Diplomato'),
+                    title: const Text('Diploma'),
                     leading: Radio<TitoloDiStudio>(
-                      value: TitoloDiStudio.Diplomato,
+                      value: TitoloDiStudio.Diploma,
                       groupValue: _titoloDiStudio,
                       onChanged: (TitoloDiStudio? value) {
                         setState(() {
@@ -172,9 +172,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ListTile(
-                    title: const Text('Laureato'),
+                    title: const Text('Laurea'),
                     leading: Radio<TitoloDiStudio>(
-                      value: TitoloDiStudio.Laureato,
+                      value: TitoloDiStudio.Laurea,
                       groupValue: _titoloDiStudio,
                       onChanged: (TitoloDiStudio? value) {
                         setState(() {
@@ -212,10 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
                         if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')),
                           );
@@ -232,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               .toString()
                               .replaceAll('TitoloDiStudio.', '');
                           print(Titolo);
-                          Persona candidato = Persona(Nome,Cognome, Email, Telefono, Data, Posizione, Titolo);
+                          Persona candidato = Persona(Nome,Cognome, Email, Telefono, Data, Titolo, Posizione);
 
                           if (Posizione == 'Cuoco') {
                             Navigator.push(

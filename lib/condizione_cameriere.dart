@@ -8,14 +8,15 @@ import 'main.dart';
 //https://flutter-examples.com/get-multiple-checkbox-checked-value-in-flutter/
 
 class CondizioneCameriere extends StatefulWidget {
-  const CondizioneCameriere({Key? key,required this.candidato}) : super(key: key);
+  const CondizioneCameriere({Key? key, required this.candidato})
+      : super(key: key);
   final Persona candidato;
+
   @override
   _CondizioneCameriereState createState() => _CondizioneCameriereState();
 }
 
 class _CondizioneCameriereState extends State<CondizioneCameriere> {
-
   Map<String, bool> values = {
     'Milano': false,
     'Roma': false,
@@ -24,8 +25,8 @@ class _CondizioneCameriereState extends State<CondizioneCameriere> {
 
   List tmpArray = [];
   bool val = false;
-  getCheckboxItems() {
 
+  getCheckboxItems() {
     values.forEach((key, value) {
       if (value == true) {
         tmpArray.add(key);
@@ -33,21 +34,21 @@ class _CondizioneCameriereState extends State<CondizioneCameriere> {
     });
     List sedi = tmpArray;
     print(tmpArray.isEmpty);
-    if(!tmpArray.isEmpty){
+    if (!tmpArray.isEmpty) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PosizioniCameriere(sedi: sedi, candidato: widget.candidato)),
-      );}
-    else {
+        MaterialPageRoute(
+            builder: (context) =>
+                PosizioniCameriere(sedi: sedi, candidato: widget.candidato)),
+      );
+    } else {
       setState(() {
         val = true;
       });
-
     }
 
     print(tmpArray);
     tmpArray = [];
-
   }
 
   @override
@@ -68,8 +69,8 @@ class _CondizioneCameriereState extends State<CondizioneCameriere> {
         Flexible(
           child: ListView(
             children: values.keys.map((String key) {
-              return new CheckboxListTile(
-                title: new Text(key),
+              return CheckboxListTile(
+                title: Text(key),
                 value: values[key],
                 activeColor: Colors.pink,
                 checkColor: Colors.white,
@@ -88,11 +89,10 @@ class _CondizioneCameriereState extends State<CondizioneCameriere> {
               style: TextStyle(fontSize: 18),
             ),
             onPressed: getCheckboxItems),
-        if(val)Text('inserisci una preferenza'),
+        if (val) Text('inserisci una preferenza'),
         SizedBox(
           height: 200,
         ),
-
       ]),
     );
   }
